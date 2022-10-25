@@ -78,7 +78,7 @@ function keyPressed()   {
 }
 
 function deviceShaken() { 
-  //userStartAudio();
+  userStartAudio();
   if (currentState == "stopped") roll(); 
 }
 
