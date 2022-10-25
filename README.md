@@ -1,3 +1,5 @@
-# p5js_animation
+# Chooser
 
-This is the start of an animation tutorial, based on https://www.youtube.com/watch?v=1lW-NLel1G8
+A roulette-style chooser. Click the foods to eliminate them from the list of choices. Press the spacebar or shake your phone to start spinning the wheel.
+
+(An unfortunate thing: emojis get pixelated when shown large on a phone. It looks good on my Windows laptop, though)
