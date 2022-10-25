@@ -1,5 +1,5 @@
 let n = 0;
-let nMax = 100; // how many flips to do in speedingUp/slowingDown
+let nMax = 150; // how much flipping happens
 const states = [ "stopped", "spinning" ];
 let currentState = "stopped";
 let allChoices = ["🍕","🍗","🍔","🍣","🥞","🥙","🥗","🍲","🍝","🍜"];
@@ -19,14 +19,13 @@ function draw() {
 
   switch (currentState) {
     case "stopped":
-      // show current choice and a way to change the list of choices
       textAlign(CENTER);
       textSize(width/2);
       text(choices[currentChoice], width/2, height-(height*.2));
       break;
     case "spinning":
-      // flip through choices, with a slow ramp-up to fullSpeed
-      currentChoice = floor( map2(n, 0, nMax, 0, nMax, CIRCULAR, BOTH) );
+      // flip through choices, with a sin-wave pattern to the flip speed
+      currentChoice = floor( map2(n, 0, nMax, 0, nMax, SINUSOIDAL, BOTH) );
       textAlign(CENTER);
       textSize(width/2);
       text(choices[currentChoice % choices.length], width/2, height-(height*.2));
@@ -58,18 +57,12 @@ function mouseClicked() {
   }
 }
 
-function keyPressed() {
-  if (key == " " && currentState == "stopped") roll();
-}
-
-function deviceShaken() {
-  if (currentState == "stopped") roll();
-}
+function keyPressed()   { if (currentState == "stopped") roll() }
+function deviceShaken() { if (currentState == "stopped") roll() }
 
 function roll() {
-  // compress the array since there could be holes from deleting items
-  choices = choices.filter(Boolean);
-  shuffle(choices, true);
+  choices = choices.filter(Boolean);  // compress the array since there could be holes from deleting items
+  shuffle(choices, true);  // shuffle just before starting to spin
   currentState = "spinning";
   n = 0;
 }
