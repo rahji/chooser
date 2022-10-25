@@ -59,13 +59,17 @@ function mouseClicked() {
 }
 
 function keyPressed() {
-  if (key == " ") {
-    if (currentState == "stopped" ) {
-      // compress the array since there could be holes from deleting items
-      choices = choices.filter(Boolean);
-      shuffle(choices, true);
-      currentState = "spinning";
-      n = 0;
-    }
-  }
+  if (key == " " && currentState == "stopped") roll();
+}
+
+function deviceShaken() {
+  if (currentState == "stopped") roll();
+}
+
+function roll() {
+  // compress the array since there could be holes from deleting items
+  choices = choices.filter(Boolean);
+  shuffle(choices, true);
+  currentState = "spinning";
+  n = 0;
 }
